@@ -16,10 +16,18 @@ var app = app || {};
 	var Urls = Backbone.Collection.extend({
 		// Reference to this collection's model.
 		model: app.Url,
+
 		parse: function(response) {
-			console.log(response.data);
+			this.links = response.links;
 			return response.data;
 		},
+
+		getPage: function(page){
+			return _.find(this.links, function(link) {
+			 	return link.rel == page;
+			});
+		},
+
 		url: 'http://www.shorten.batjaa.com/api/v1/urls'
 	});
 

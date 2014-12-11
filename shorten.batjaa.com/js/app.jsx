@@ -135,19 +135,36 @@ var app = app || {};
 			}, this);
 
 			if (urls.length) {
+				var firstPage = urls.getPage('first');
+				var prevPage = urls.getPage('prev');
+				var nextPage = urls.getPage('next');
+				var lastPage = urls.getPage('last');
+
 				main = (
 					<section id="main">
 						<ul id="url-list">
 							{urlItems}
 						</ul>
+						<a className={"button two columns "+React.addons.classSet({
+									'button-primary': firstPage
+								})} href={firstPage?firstPage.href:'javascript:void(0)'}>&#124;&#60;</a>
+						<a className={"button two columns "+React.addons.classSet({
+									'button-primary': prevPage
+								})} href={prevPage?prevPage.href:'javascript:void(0)'}>&#60;</a>
+						<a className={"button two columns "+React.addons.classSet({
+									'button-primary': nextPage
+								})} href={nextPage?nextPage.href:'javascript:void(0)'} >&#62;</a>
+						<a className={"button two columns "+React.addons.classSet({
+									'button-primary': lastPage
+								})} href={lastPage?lastPage.href:'javascript:void(0)'}>&#62;&#124;</a>
 					</section>
 				);
 			}
 
 			return (
 				<div>
-					<div classNameName="row">
-						<div classNameName="twelve columns">
+					<div className="row">
+						<div className="twelve columns">
 							<header id="header">
 								<h1>Shorten URLs</h1>
 							</header>
