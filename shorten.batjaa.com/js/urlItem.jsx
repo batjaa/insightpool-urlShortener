@@ -54,7 +54,9 @@ var app = app || {};
 								</tbody>
 							</table>
 						</div>
-						<div className="six columns"></div>
+						<div className="six columns">
+							<div id={'container-'+this.props.url.get('id')}>{loadCharts('#container-'+this.props.url.get('id'), this.props.url.get('urlVisits'))}</div>
+						</div>
 					</div>
 					<hr />
 				</div>

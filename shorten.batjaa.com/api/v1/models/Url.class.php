@@ -20,6 +20,7 @@ class Url
             $sql = "INSERT INTO ip_url (`key`, `url`, `created_date`) VALUES ('$this->key', '$this->url', '$this->created_date')";
             // use exec() because no results are returned
             $conn->exec($sql);
+            $this->id = $conn->lastInsertId();
             return $this;
         }
         
@@ -50,6 +51,7 @@ class Url
         $stmt = $conn->prepare("SELECT * FROM ip_url WHERE id=$id"); 
         $stmt->execute();
         $url = $stmt->fetchObject("Url");
+        if(!$url) return false;
         $url->links = $this->getLinks($url);
         $url->urlVisits = $this->getUrlVisits($url->id);
         return $url;
@@ -62,6 +64,7 @@ class Url
         $stmt = $conn->prepare("SELECT * FROM ip_url WHERE url='$url'"); 
         $stmt->execute();
         $url = $stmt->fetchObject("Url");
+        if(!$url) return false;
         $url->links = $this->getLinks($url);
         $url->urlVisits = $this->getUrlVisits($url->id);
         return $url;

@@ -48,7 +48,9 @@ class ShortenAPI extends API
         } else if($this->method == 'POST') {
             $url = new Url();
             $url->key = (string)time();
-            $url->url = $this->request['url'];
+            $data = json_decode($this->file, true);
+            // return $data['url'].'  '.$this->file.'\n'.$data;
+            $url->url = stripslashes($data['url']);
             $url->created_date = date("Y-m-d h:i:sa");
             $newUrl = $url->save();
             if($newUrl){
